@@ -25,11 +25,14 @@ function changeBodyAttribute(attribute, value) {
   return true
 }
 
+<<<<<<< HEAD
 function changeHTMLAttribute(attribute, value) {
   if (document.documentElement) document.documentElement.setAttribute(attribute, value);
   return true;
 }
 
+=======
+>>>>>>> master
 /**
  * Toggle the class on body
  * @param {*} cssClass
@@ -72,14 +75,25 @@ function* changeLayout({ payload: layout }) {
  * Changes the layout mode
  * @param {*} param0
  */
+<<<<<<< HEAD
 function* changeLayoutMode({ payload: mode }) {
   try {
       yield call(changeHTMLAttribute, "data-bs-theme", mode);
+=======
+ function* changeLayoutMode({ payload: mode }) {
+  try {
+      // yield call(changeBodyAttribute, "data-layout-mode", mode);
+      yield call(changeBodyAttribute, "data-bs-theme", mode);
+>>>>>>> master
   } catch (error) {
       // console.log(error);
   }
 }
+<<<<<<< HEAD
 // હા, અમે હવે નીચેની લિંક આપી છે ઉદાહરણ તરીકે ગ્રીડ ડેટા ટેબલને સૉર્ટ કરવા.
+=======
+
+>>>>>>> master
 /**
  * Changes the layout width
  * @param {*} param0

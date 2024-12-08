@@ -59,7 +59,10 @@
   "Email verification 2" : "Email verification 2",
   "Two step verification" : "Two Step verification",
   "Two step verification 2" : "Two Step verification 2",
+<<<<<<< HEAD
   "Kanban Board": "Kanban Board",
+=======
+>>>>>>> master
   "Create Task": ",Create Task",
   "Contacts": "Contacts",
   "User Grid": "User Grid",
@@ -88,9 +91,12 @@
   "Grid": "Grid",
   "Images": "Images",
   "Lightbox": "Lightbox",
+<<<<<<< HEAD
   "Placeholders" : "Placeholders",
   "OffCanvas" : "OffCanvas",
   "Toasts" : "Toasts",
+=======
+>>>>>>> master
   "Modals": "Modals",
   "Range Slider": "Range Slider",
   "Session Timeout": "Session Timeout",

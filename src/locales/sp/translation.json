@@ -23,11 +23,15 @@
   "Wallet": "Billetera",
   "Buy/Sell": "Compra venta",
   "Blog" : "Blog",
+<<<<<<< HEAD
   "Job":"Trabajo",
+=======
+>>>>>>> master
   "File Manager" : "Administradora de archivos",
   "Blog List" : "Lista de blogs",
   "Blog Grid" : "Blog Grid",
   "Blog Details" : "Detalles del blog",
+<<<<<<< HEAD
   "Jobs":"trabajos",
   "Job List":"lista de trabajo",
   "Job Grid":"rejilla de trabajo",
@@ -38,6 +42,9 @@
   "List":"Lista",
   "Overview":"Descripción general",
   "Templates" : "Modelo",
+=======
+  "Templates" : "Modelo" ,
+>>>>>>> master
   "Basic Action" : "Acción básica",
   "Alert Email" : "Correo electrónico de alerta",
   "Billing Email" : "Correo Electrónico de Facturas",
@@ -69,7 +76,10 @@
   "Create New": "Creare nuovo",
   "Tasks": "Compiti",
   "Task List": "Elenco delle attività",
+<<<<<<< HEAD
   "Kanban Board": "Kanban Board",
+=======
+>>>>>>> master
   "Create Task": "Crea attività",
   "Contacts": "Contatti",
   "User Grid": "Griglia utente",
@@ -99,9 +109,12 @@
   "Images": "Imágenes",
   "Modals": "Modals",
   "Lightbox": "Caja ligera",
+<<<<<<< HEAD
   "Placeholders" : "Marcadores de posición",
   "OffCanvas" : "OffCanvas",
   "Toasts" : "Tostadas",
+=======
+>>>>>>> master
   "Range Slider": "Control deslizante de rango",
   "Session Timeout": "Hora de término de la sesión",
   "Progress Bars": "Barras de progreso",

@@ -16,21 +16,33 @@ const fireBaseBackend = getFirebaseBackend();
 
 function* loginUser({ payload: { user, history } }) {
   try {
+<<<<<<< HEAD
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+=======
+    if (import.meta.env.VITE_APP_DEFAULTAUTH === "firebase") {
+>>>>>>> master
       const response = yield call(
         fireBaseBackend.loginUser,
         user.email,
         user.password
       );
       yield put(loginSuccess(response));
+<<<<<<< HEAD
     } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
+=======
+    } else if (import.meta.env.VITE_APP_DEFAULTAUTH === "jwt") {
+>>>>>>> master
       const response = yield call(postJwtLogin, {
         email: user.email,
         password: user.password,
       });
       localStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
+<<<<<<< HEAD
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
+=======
+    } else if (import.meta.env.VITE_APP_DEFAULTAUTH === "fake") {
+>>>>>>> master
       const response = yield call(postFakeLogin, {
         email: user.email,
         password: user.password,
@@ -48,7 +60,11 @@ function* logoutUser({ payload: { history } }) {
   try {
     localStorage.removeItem("authUser");
 
+<<<<<<< HEAD
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+=======
+    if (import.meta.env.VITE_APP_DEFAULTAUTH === "firebase") {
+>>>>>>> master
       const response = yield call(fireBaseBackend.logout);
       yield put(logoutUserSuccess(response));
     }
@@ -60,7 +76,11 @@ function* logoutUser({ payload: { history } }) {
 
 function* socialLogin({ payload: { type, history } }) {
   try {
+<<<<<<< HEAD
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+=======
+    if (import.meta.env.VITE_APP_DEFAULTAUTH === "firebase") {
+>>>>>>> master
       const fireBaseBackend = getFirebaseBackend();
       const response = yield call(fireBaseBackend.socialLoginUser, type);
       if (response) {
@@ -70,11 +90,18 @@ function* socialLogin({ payload: { type, history } }) {
       }
       localStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
+<<<<<<< HEAD
     }
     if(response)
     history("/dashboard");
   } catch (error) {
     console.log("error",error)
+=======
+      if(response)
+      history("/dashboard");
+    }
+  } catch (error) {
+>>>>>>> master
     yield put(apiError(error));
   }
 }

@@ -47,4 +47,8 @@ export const socialLogin = (type, history) => {
     type: SOCIAL_LOGIN,
     payload: { type, history },
   };
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> master

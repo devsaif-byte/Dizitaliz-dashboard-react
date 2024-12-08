@@ -11,7 +11,11 @@ import {
   TOGGLE_LEFTMENU,
   SHOW_SIDEBAR,
   CHANGE_LAYOUT_MODE
+<<<<<<< HEAD
 } from "./actionTypes";
+=======
+} from "./actionTypes"
+>>>>>>> master
 
 //constants
 import {
@@ -28,7 +32,11 @@ const INIT_STATE = {
   layoutType: layoutTypes.VERTICAL,
   layoutModeType: layoutModeTypes.LIGHT,
   layoutWidth: layoutWidthTypes.FLUID,
+<<<<<<< HEAD
   leftSideBarTheme: leftSideBarThemeTypes.DARK,
+=======
+  leftSideBarTheme: leftSideBarThemeTypes.LIGHT,
+>>>>>>> master
   leftSideBarThemeImage: leftBarThemeImageTypes.NONE,
   leftSideBarType: leftSidebarTypes.DEFAULT,
   topbarTheme: topBarThemeTypes.LIGHT,
@@ -38,6 +46,10 @@ const INIT_STATE = {
   showSidebar: true,
   leftMenu: false,
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 const Layout = (state = INIT_STATE, action) => {
   switch (action.type) {
     case CHANGE_LAYOUT:
@@ -50,13 +62,19 @@ const Layout = (state = INIT_STATE, action) => {
         ...state,
         isPreloader: action.payload,
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     case CHANGE_LAYOUT_MODE:
       return {
         ...state,
         layoutModeType: action.payload,
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     case CHANGE_LAYOUT_WIDTH:
       return {
         ...state,

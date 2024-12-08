@@ -9,7 +9,10 @@ const initialState = {
   message: null,
   loading: false,
   user: null,
+<<<<<<< HEAD
   success: false
+=======
+>>>>>>> master
 }
 
 const account = (state = initialState, action) => {
@@ -18,7 +21,10 @@ const account = (state = initialState, action) => {
       state = {
         ...state,
         loading: true,
+<<<<<<< HEAD
         success: false,
+=======
+>>>>>>> master
         registrationError: null,
       }
       break
@@ -27,7 +33,10 @@ const account = (state = initialState, action) => {
         ...state,
         loading: false,
         user: action.payload,
+<<<<<<< HEAD
         success: true,
+=======
+>>>>>>> master
         registrationError: null,
       }
       break
@@ -36,7 +45,10 @@ const account = (state = initialState, action) => {
         ...state,
         user: null,
         loading: false,
+<<<<<<< HEAD
         success: false,
+=======
+>>>>>>> master
         registrationError: action.payload,
       }
       break

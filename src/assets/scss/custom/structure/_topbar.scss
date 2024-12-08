@@ -3,6 +3,7 @@
 // 
 
 #page-topbar {
+<<<<<<< HEAD
   position: fixed;
   top: 0;
   right: 0;
@@ -13,6 +14,19 @@
   @media (max-width: 992.98px) {
     left: 0;
   }
+=======
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: $sidebar-width;
+    z-index: 1002;
+    background-color: var(--#{$prefix}header-bg);
+    box-shadow: $box-shadow;
+
+    @media (max-width: 992.98px) {
+        left: 0;
+    }
+>>>>>>> master
 }
 
 .navbar-header {
@@ -22,7 +36,13 @@
     align-items: center;
     margin: 0 auto;
     height: $header-height;
+<<<<<<< HEAD
     padding: 0 calc(#{$grid-gutter-width} * 0.5) 0 0 /*rtl: 0 0 0 calc(#{$grid-gutter-width} / 2) */;
+=======
+    padding: 0 calc(#{$grid-gutter-width} * 0.5) 0 0
+    /*rtl: 0 0 0 calc(#{$grid-gutter-width} / 2) */
+    ;
+>>>>>>> master
 
     .dropdown .show {
         &.header-item {
@@ -63,6 +83,10 @@
         box-shadow: none;
         border-radius: 30px;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     span {
         position: absolute;
         z-index: 10;
@@ -77,10 +101,18 @@
 // Mega menu
 
 .megamenu-list {
+<<<<<<< HEAD
     li{
         position: relative;
         padding: 5px 0px;
         a{
+=======
+    li {
+        position: relative;
+        padding: 5px 0px;
+
+        a {
+>>>>>>> master
             color: var(--#{$prefix}body-color);
         }
     }
@@ -172,7 +204,12 @@
     }
 
     &:hover {
+<<<<<<< HEAD
         background-color: var(--#{$prefix}header-dark-bg);
+=======
+        // background-color: var(--#{$prefix}header-dark-bg);
+        border-color: var(--#{$prefix}border-color);
+>>>>>>> master
     }
 }
 
@@ -186,9 +223,16 @@
 }
 
 body[data-topbar="dark"] {
+<<<<<<< HEAD
     #page-topbar { 
         background-color: $header-dark-bg;
     }
+=======
+    #page-topbar {
+        background-color: $header-dark-bg;
+    }
+
+>>>>>>> master
     .navbar-header {
         .dropdown .show {
             &.header-item {
@@ -203,7 +247,11 @@ body[data-topbar="dark"] {
 
     .header-item {
         color: var(--#{$prefix}header-dark-item-color);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
         &:hover {
             color: var(--#{$prefix}header-dark-item-color);
         }
@@ -212,7 +260,11 @@ body[data-topbar="dark"] {
     .header-profile-user {
         background-color: rgba($white, 0.25);
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     .noti-icon {
         i {
             color: var(--#{$prefix}header-dark-item-color);
@@ -228,6 +280,7 @@ body[data-topbar="dark"] {
     }
 
     .app-search {
+<<<<<<< HEAD
     
         .form-control {
             background-color: rgba(var(--#{$prefix}topbar-search-bg),0.07);
@@ -236,6 +289,17 @@ body[data-topbar="dark"] {
         span,
         input.form-control::-webkit-input-placeholder {
             color: rgba($white,0.5);
+=======
+
+        .form-control {
+            background-color: rgba(var(--#{$prefix}topbar-search-bg), 0.07);
+            color: $white;
+        }
+
+        span,
+        input.form-control::-webkit-input-placeholder {
+            color: rgba($white, 0.5);
+>>>>>>> master
         }
     }
 }
@@ -277,6 +341,7 @@ body[data-layout="horizontal"] {
     .navbar-brand-box {
         width: auto;
     }
+<<<<<<< HEAD
     .page-content {
         margin-top: $header-height;
         padding: calc(55px + #{$grid-gutter-width}) calc(#{$grid-gutter-width} * 0.5) $footer-height calc(#{$grid-gutter-width} * 0.5);
@@ -288,5 +353,19 @@ body[data-layout="horizontal"] {
         .page-content {
             margin-top: 15px;
         }    
+=======
+
+    .page-content {
+        margin-top: $header-height;
+        padding: calc(55px + #{$grid-gutter-width}) calc(#{$grid-gutter-width} * 0.5) $footer-height calc(#{$grid-gutter-width} * 0.5);
+    }
+}
+
+@media (max-width: 992px) {
+    body[data-layout="horizontal"] {
+        .page-content {
+            margin-top: 15px;
+        }
+>>>>>>> master
     }
 }

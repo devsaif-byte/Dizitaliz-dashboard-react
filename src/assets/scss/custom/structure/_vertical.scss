@@ -3,6 +3,7 @@
 // 
 
 .metismenu {
+<<<<<<< HEAD
     margin: 0;
 
     li {
@@ -30,6 +31,35 @@
         transition-duration: .35s;
         transition-property: height, visibility;
     }
+=======
+  margin: 0;
+
+  li {
+    display: block;
+    width: 100%;
+  }
+
+  .mm-collapse {
+    display: none;
+
+    &:not(.mm-show) {
+      display: none;
+    }
+
+    &.mm-show {
+      display: block
+    }
+  }
+
+  .mm-collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition-timing-function: ease;
+    transition-duration: .35s;
+    transition-property: height, visibility;
+  }
+>>>>>>> master
 }
 
 
@@ -43,6 +73,10 @@
   top: 0;
   padding-top: $header-height;
   box-shadow: $box-shadow;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   @media (max-width: 991.98px) {
     top: $header-height;
     padding-top: 0px;
@@ -52,6 +86,10 @@
     position: fixed;
     top: 0px;
     z-index: 99;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     @media (max-width: 991.98px) {
       display: none;
     }
@@ -59,6 +97,7 @@
 }
 
 .main-content {
+<<<<<<< HEAD
     margin-left: $sidebar-width;
     overflow: hidden;
 
@@ -66,10 +105,20 @@
         padding: 0 15px 10px 15px;
         margin-top: $header-height;
     }
+=======
+  margin-left: $sidebar-width;
+  overflow: hidden;
+
+  .content {
+    padding: 0 15px 10px 15px;
+    margin-top: $header-height;
+  }
+>>>>>>> master
 }
 
 
 #sidebar-menu {
+<<<<<<< HEAD
     padding: 10px 0 30px 0;
 
     .mm-active {
@@ -203,14 +252,160 @@
             display: block;
         }
     }
+=======
+  padding: 10px 0 30px 0;
+
+  .mm-active {
+    >.has-arrow {
+      &:after {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  .has-arrow {
+    &:after {
+      content: "\F0140";
+      font-family: 'Material Design Icons';
+      display: block;
+      float: right;
+      transition: transform .2s;
+      font-size: 1rem;
+    }
+  }
+
+  ul {
+    li {
+      a {
+        display: block;
+        padding: .625rem 1.5rem;
+        color: $sidebar-menu-item-color;
+        position: relative;
+        font-size: 13px;
+        transition: all .4s;
+
+        i {
+          display: inline-block;
+          min-width: 1.75rem;
+          padding-bottom: .125em;
+          font-size: 1.25rem;
+          line-height: 1.40625rem;
+          vertical-align: middle;
+          color: $sidebar-menu-item-icon-color;
+          transition: all .4s;
+        }
+
+        &:hover {
+          color: $sidebar-menu-item-hover-color;
+
+          i {
+            color: $sidebar-menu-item-hover-color;
+          }
+        }
+      }
+
+      .badge {
+        margin-top: 4px;
+      }
+
+      ul.sub-menu {
+        padding: 0;
+
+        li {
+
+          a {
+            padding: .4rem 1.5rem .4rem 3.5rem;
+            font-size: 13px;
+            color: $sidebar-menu-sub-item-color;
+
+            &:hover {
+              color: $sidebar-menu-item-hover-color;
+            }
+          }
+
+          ul.sub-menu {
+            padding: 0;
+
+            li {
+              a {
+                padding: .4rem 1.5rem .4rem 4.5rem;
+                font-size: 13px;
+
+
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.menu-title {
+  padding: 12px 20px !important;
+  letter-spacing: .05em;
+  pointer-events: none;
+  cursor: default;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: $sidebar-menu-item-icon-color;
+  font-weight: $font-weight-semibold;
+}
+
+.mm-active {
+  color: $sidebar-menu-item-active-color !important;
+
+  >a {
+    color: $sidebar-menu-item-active-color !important;
+
+    i {
+      color: $sidebar-menu-item-active-color !important;
+    }
+  }
+
+  .active {
+    color: $sidebar-menu-item-active-color !important;
+
+    i {
+      color: $sidebar-menu-item-active-color !important;
+    }
+  }
+
+  >i {
+    color: $sidebar-menu-item-active-color !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .vertical-menu {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+  }
+
+  body.sidebar-enable {
+    .vertical-menu {
+      display: block;
+    }
+  }
+>>>>>>> master
 }
 
 // Enlarge menu
 .vertical-collpsed {
 
+<<<<<<< HEAD
     .main-content {
         margin-left: $sidebar-collapsed-width;
     }
+=======
+  .main-content {
+    margin-left: $sidebar-collapsed-width;
+  }
+>>>>>>> master
 
   .navbar-brand-box {
     width: $sidebar-collapsed-width !important;
@@ -218,11 +413,16 @@
 
   #page-topbar {
     left: $sidebar-collapsed-width;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     @media (max-width: 991.98px) {
       left: 0;
     }
   }
 
+<<<<<<< HEAD
     .logo {
         span.logo-lg {
             display: none;
@@ -316,6 +516,101 @@
                         }
 
             > ul {
+=======
+  .logo {
+    span.logo-lg {
+      display: none;
+    }
+
+    span.logo-sm {
+      display: block;
+    }
+  }
+
+  // Side menu
+  .vertical-menu {
+    position: absolute;
+    width: $sidebar-collapsed-width !important;
+    z-index: 5;
+
+    .simplebar-mask,
+    .simplebar-content-wrapper {
+      overflow: visible !important;
+    }
+
+    .simplebar-scrollbar {
+      display: none !important;
+    }
+
+    .simplebar-offset {
+      bottom: 0 !important;
+    }
+
+    // Sidebar Menu
+    #sidebar-menu {
+
+      .menu-title,
+      .badge,
+      .collapse.in {
+        display: none !important;
+      }
+
+      .nav.collapse {
+        height: inherit !important;
+      }
+
+      .has-arrow {
+        &:after {
+          display: none;
+        }
+      }
+
+      >ul {
+        >li {
+          position: relative;
+          white-space: nowrap;
+
+          >a {
+            padding: 15px 20px;
+            min-height: 55px;
+            transition: none;
+
+            &:hover,
+            &:active,
+            &:focus {
+              color: $sidebar-menu-item-hover-color;
+            }
+
+            i {
+              font-size: 1.45rem;
+              margin-left: 4px;
+            }
+
+            span {
+              display: none;
+              padding-left: 25px;
+            }
+          }
+
+          &:hover {
+            >a {
+              position: relative;
+              width: calc(190px + #{$sidebar-collapsed-width});
+              color: $primary;
+              background-color: darken($sidebar-bg, 4%);
+              transition: none;
+
+              i {
+                color: $primary;
+              }
+
+              span {
+                display: inline;
+              }
+            }
+
+            >ul {
+>>>>>>> master
               display: block;
               left: $sidebar-collapsed-width;
               position: absolute;
@@ -327,6 +622,7 @@
                 box-shadow: 3px 5px 10px 0 rgba(54, 61, 71, 0.1);
               }
 
+<<<<<<< HEAD
                             a {
                                 box-shadow: none;
                                 padding: 8px 20px;
@@ -381,10 +677,67 @@
         }
 
     }
+=======
+              a {
+                box-shadow: none;
+                padding: 8px 20px;
+                position: relative;
+                width: 190px;
+                z-index: 6;
+                color: $sidebar-menu-sub-item-color;
+
+                &:hover {
+                  color: $sidebar-menu-item-hover-color;
+                }
+              }
+            }
+          }
+        }
+
+        ul {
+          padding: 5px 0;
+          z-index: 9999;
+          display: none;
+          background-color: $sidebar-bg;
+
+          li {
+            &:hover {
+              >ul {
+                display: block;
+                left: 190px;
+                height: auto !important;
+                margin-top: -36px;
+                position: absolute;
+                width: 190px;
+              }
+            }
+
+            >a {
+              span.pull-right {
+                position: absolute;
+                right: 20px;
+                top: 12px;
+                transform: rotate(270deg);
+              }
+            }
+          }
+
+          li.active {
+            a {
+              color: $gray-100;
+            }
+          }
+        }
+      }
+    }
+
+  }
+>>>>>>> master
 }
 
 
 body[data-sidebar="dark"] {
+<<<<<<< HEAD
     .vertical-menu {
         background: $sidebar-dark-bg;
     }
@@ -414,6 +767,37 @@ body[data-sidebar="dark"] {
 
                         a {
                             color: $sidebar-dark-menu-sub-item-color;
+=======
+  .vertical-menu {
+    background: $sidebar-dark-bg;
+  }
+
+  #sidebar-menu {
+
+    ul {
+      li {
+        a {
+          color: $sidebar-dark-menu-item-color;
+
+          i {
+            color: $sidebar-dark-menu-item-icon-color;
+          }
+
+          &:hover {
+            color: $sidebar-dark-menu-item-hover-color;
+
+            i {
+              color: $sidebar-dark-menu-item-hover-color;
+            }
+          }
+        }
+
+        ul.sub-menu {
+          li {
+
+            a {
+              color: $sidebar-dark-menu-sub-item-color;
+>>>>>>> master
 
               &:hover {
                 color: $sidebar-dark-menu-item-hover-color;
@@ -424,6 +808,10 @@ body[data-sidebar="dark"] {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   // Enlarge menu
   &.vertical-collpsed {
     min-height: 1760px;
@@ -433,6 +821,7 @@ body[data-sidebar="dark"] {
       .navbar-brand-box {
         background: $sidebar-dark-bg;
       }
+<<<<<<< HEAD
       // Sidebar Menu
       #sidebar-menu {
         > ul {
@@ -441,11 +830,24 @@ body[data-sidebar="dark"] {
               > a {
                 background: lighten($sidebar-dark-bg, 2%);
                 color: $sidebar-dark-menu-item-hover-color;
+=======
+
+      // Sidebar Menu
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover {
+              >a {
+                background: lighten($sidebar-dark-bg, 2%);
+                color: $sidebar-dark-menu-item-hover-color;
+
+>>>>>>> master
                 i {
                   color: $sidebar-dark-menu-item-hover-color;
                 }
               }
 
+<<<<<<< HEAD
                             >ul {
                                 a{
                                     color: $sidebar-dark-menu-sub-item-color;
@@ -503,18 +905,91 @@ body[data-sidebar="dark"] {
     .menu-title {
         color: $sidebar-dark-menu-item-icon-color;
     }
+=======
+              >ul {
+                a {
+                  color: $sidebar-dark-menu-sub-item-color;
+
+                  &:hover {
+                    color: $sidebar-dark-menu-item-hover-color;
+                  }
+                }
+              }
+            }
+          }
+
+          ul {
+            background-color: $sidebar-dark-bg;
+          }
+
+        }
+
+        ul {
+
+          li {
+            &.mm-active .active {
+              color: $sidebar-dark-menu-item-active-color !important;
+
+              i {
+                color: $sidebar-dark-menu-item-active-color !important;
+              }
+            }
+          }
+        }
+
+      }
+
+
+    }
+  }
+
+  .mm-active {
+    color: $sidebar-dark-menu-item-active-color !important;
+
+    >a {
+      color: $sidebar-dark-menu-item-active-color !important;
+
+      i {
+        color: $sidebar-dark-menu-item-active-color !important;
+      }
+    }
+
+    >i {
+      color: $sidebar-dark-menu-item-active-color !important;
+    }
+
+    .active {
+      color: $sidebar-dark-menu-item-active-color !important;
+
+      i {
+        color: $sidebar-dark-menu-item-active-color !important;
+      }
+    }
+  }
+
+  .menu-title {
+    color: $sidebar-dark-menu-item-icon-color;
+  }
+>>>>>>> master
 }
 
 
 body[data-layout="horizontal"] {
+<<<<<<< HEAD
     .main-content {
         margin-left: 0 !important;
     }
+=======
+  .main-content {
+    margin-left: 0 !important;
+  }
+>>>>>>> master
 }
 
 // Compact Sidebar
 
 body[data-sidebar-size="small"] {
+<<<<<<< HEAD
     .navbar-brand-box{
         width: $sidebar-width-sm;
     }
@@ -539,6 +1014,37 @@ body[data-sidebar-size="small"] {
 
   #page-topbar {
     left: $sidebar-width-sm;
+=======
+  .navbar-brand-box {
+    width: $sidebar-width-sm;
+  }
+
+  .vertical-menu {
+    width: $sidebar-width-sm;
+    text-align: center;
+
+    .has-arrow:after,
+    .badge {
+      display: none !important;
+    }
+  }
+
+  .main-content {
+    margin-left: $sidebar-width-sm;
+  }
+
+  .footer {
+    left: $sidebar-width-sm;
+
+    @media (max-width: 991.98px) {
+      left: 0;
+    }
+  }
+
+  #page-topbar {
+    left: $sidebar-width-sm;
+
+>>>>>>> master
     @media (max-width: 991.98px) {
       left: 0;
 
@@ -557,12 +1063,17 @@ body[data-sidebar-size="small"] {
           display: block;
         }
       }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
       ul.sub-menu {
         li {
           a {
             padding-left: 1.5rem;
           }
 
+<<<<<<< HEAD
                     ul.sub-menu li a {
                         padding-left: 1.5rem;
                     }
@@ -592,6 +1103,41 @@ body[data-sidebar-size="small"] {
             left: $sidebar-collapsed-width;
         }
     }
+=======
+          ul.sub-menu li a {
+            padding-left: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  &.vertical-collpsed {
+    .main-content {
+      margin-left: $sidebar-collapsed-width;
+    }
+
+    .vertical-menu {
+      #sidebar-menu {
+        text-align: left;
+
+        >ul {
+          >li {
+            >a {
+              i {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .footer {
+      left: $sidebar-collapsed-width;
+    }
+  }
+>>>>>>> master
 }
 
 // colored sidebar
@@ -606,6 +1152,10 @@ body[data-sidebar="greatwhale"] {
     .logo-dark {
       display: none;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     .logo-light {
       display: block;
     }
@@ -613,18 +1163,31 @@ body[data-sidebar="greatwhale"] {
 
   .mm-active {
     color: $white !important;
+<<<<<<< HEAD
     > a {
       color: $white !important;
+=======
+
+    >a {
+      color: $white !important;
+
+>>>>>>> master
       i {
         color: $white !important;
       }
     }
+<<<<<<< HEAD
     > i,
+=======
+
+    >i,
+>>>>>>> master
     .active {
       color: $white !important;
     }
   }
 
+<<<<<<< HEAD
     #sidebar-menu {
         ul {
             li {
@@ -651,11 +1214,45 @@ body[data-sidebar="greatwhale"] {
                         }
                     }
                 }
+=======
+  #sidebar-menu {
+    ul {
+      li {
+        &.menu-title {
+          color: rgba($white, 0.6);
+        }
+
+        a {
+          color: rgba($white, 0.6);
+
+          i {
+            color: rgba($white, 0.6);
+          }
+
+          &.waves-effect {
+            .waves-ripple {
+              background: rgba($white, 0.1);
+            }
+          }
+
+          &:hover {
+            color: $white;
+
+            i {
+              color: $white;
+            }
+          }
+        }
+>>>>>>> master
 
         ul.sub-menu {
           li {
             a {
               color: rgba($white, 0.5);
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
               &:hover {
                 color: $white;
               }
@@ -666,6 +1263,7 @@ body[data-sidebar="greatwhale"] {
     }
   }
 
+<<<<<<< HEAD
     &.vertical-collpsed {
         .vertical-menu {
             #sidebar-menu{
@@ -712,12 +1310,68 @@ body[data-sidebar="greatwhale"] {
             }
         }
     }
+=======
+  &.vertical-collpsed {
+    .vertical-menu {
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover>a {
+              background-color: lighten($primary, 2%);
+              color: $white;
+
+              i {
+                color: $white;
+              }
+            }
+          }
+        }
+
+        ul {
+          li {
+            &.mm-active {
+              .active {
+                color: $sidebar-menu-item-active-color !important;
+              }
+            }
+
+            ul.sub-menu {
+              li {
+                a {
+                  &:hover {
+                    color: $sidebar-menu-item-active-color;
+                  }
+                }
+
+                &.mm-active {
+                  color: $sidebar-menu-item-active-color !important;
+
+                  >a {
+                    color: $sidebar-menu-item-active-color !important;
+
+                    i {
+                      color: $sidebar-menu-item-active-color !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+>>>>>>> master
 }
 
 // colored sidebar
 .bg-colored {
   background-color: $primary !important;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 body[data-sidebar="colored"] {
   .vertical-menu {
     background-color: $primary;
@@ -735,10 +1389,18 @@ body[data-sidebar="colored"] {
       .navbar-brand-box {
         background-color: $primary;
       }
+<<<<<<< HEAD
       #sidebar-menu {
         > ul {
           > li {
             &:hover > a {
+=======
+
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover>a {
+>>>>>>> master
               background-color: lighten($primary, 2%);
             }
           }
@@ -746,6 +1408,10 @@ body[data-sidebar="colored"] {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   &[data-sidebar-size="small"] {
     .menu-title {
       background: transparent;
@@ -780,10 +1446,18 @@ body[data-sidebar="winter"] {
         background-image: linear-gradient(to right, #556ee6, #34c38f);
         background-repeat: repeat-x;
       }
+<<<<<<< HEAD
       #sidebar-menu {
         > ul {
           > li {
             &:hover > a {
+=======
+
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover>a {
+>>>>>>> master
               background-image: linear-gradient(to right, #556ee6, #34c38f);
               background-repeat: repeat-x;
             }
@@ -821,10 +1495,18 @@ body[data-sidebar="ladylip"] {
         background-image: linear-gradient(to right, #556ee6, #f46a6a);
         background-repeat: repeat-x;
       }
+<<<<<<< HEAD
       #sidebar-menu {
         > ul {
           > li {
             &:hover > a {
+=======
+
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover>a {
+>>>>>>> master
               background-image: linear-gradient(to right, #556ee6, #f46a6a);
               background-repeat: repeat-x;
             }
@@ -833,6 +1515,10 @@ body[data-sidebar="ladylip"] {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   &[data-sidebar-size="small"] {
     .menu-title {
       background-image: linear-gradient(to right, #556ee6, #f46a6a);
@@ -847,6 +1533,10 @@ body[data-sidebar="plumplate"] {
     background-image: linear-gradient(to right, #556ee6, #f1b44c);
     background-repeat: repeat-x;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   @media (max-width: 991.98px) {
     .navbar-brand-box {
       background-image: linear-gradient(to right, #556ee6, #f1b44c);
@@ -860,10 +1550,18 @@ body[data-sidebar="plumplate"] {
         background-image: linear-gradient(to right, #556ee6, #f1b44c);
         background-repeat: repeat-x;
       }
+<<<<<<< HEAD
       #sidebar-menu {
         > ul {
           > li {
             &:hover > a {
+=======
+
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover>a {
+>>>>>>> master
               background-image: linear-gradient(to right, #556ee6, #f1b44c);
               background-repeat: repeat-x;
             }
@@ -872,6 +1570,10 @@ body[data-sidebar="plumplate"] {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   &[data-sidebar-size="small"] {
     .menu-title {
       background-image: linear-gradient(to right, #556ee6, #f1b44c);
@@ -900,10 +1602,18 @@ body[data-sidebar="strongbliss"] {
         background-image: linear-gradient(to right, #f46a6a, #f1b44c);
         background-repeat: repeat-x;
       }
+<<<<<<< HEAD
       #sidebar-menu {
         > ul {
           > li {
             &:hover > a {
+=======
+
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover>a {
+>>>>>>> master
               background-image: linear-gradient(to right, #f46a6a, #f1b44c);
               background-repeat: repeat-x;
             }
@@ -912,6 +1622,10 @@ body[data-sidebar="strongbliss"] {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   &[data-sidebar-size="small"] {
     .menu-title {
       background-image: linear-gradient(to right, #f46a6a, #f1b44c);
@@ -936,6 +1650,7 @@ body[data-sidebar="greatwhale"] {
   &.vertical-collpsed {
     .vertical-menu {
       .navbar-brand-box {
+<<<<<<< HEAD
         background-image: linear-gradient(
           to right,
           darken($primary, 15%),
@@ -952,6 +1667,21 @@ body[data-sidebar="greatwhale"] {
                 darken($primary, 15%),
                 #50a5f1
               );
+=======
+        background-image: linear-gradient(to right,
+            darken($primary, 15%),
+            #50a5f1);
+        background-repeat: repeat-x;
+      }
+
+      #sidebar-menu {
+        >ul {
+          >li {
+            &:hover>a {
+              background-image: linear-gradient(to right,
+                  darken($primary, 15%),
+                  #50a5f1);
+>>>>>>> master
               background-repeat: repeat-x;
             }
           }
@@ -959,6 +1689,10 @@ body[data-sidebar="greatwhale"] {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   &[data-sidebar-size="small"] {
     .menu-title {
       background-image: linear-gradient(to right, #556ee6, #50a5f1);
@@ -1008,6 +1742,10 @@ body[data-sidebar-image] {
     left: 0;
     background-size: cover;
     background-position: 50%;
+<<<<<<< HEAD
+=======
+    background-image: url("../../../images/sidebar/img3.jpg");
+>>>>>>> master
     opacity: 0.07;
   }
 }
@@ -1049,17 +1787,30 @@ body[data-sidebar-image="img4"] {
   width: 30px;
   height: 30px;
 }
+<<<<<<< HEAD
 .gradient-colored {
   background-color: $primary;
 }
+=======
+
+.gradient-colored {
+  background-color: $primary;
+}
+
+>>>>>>> master
 .gradient-winter {
   background-image: linear-gradient(to right, #556ee6, #34c38f);
   background-repeat: repeat-x;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 .gradient-lady-lip {
   background-image: linear-gradient(to right, #556ee6, #f46a6a);
   background-repeat: repeat-x;
 }
+<<<<<<< HEAD
 .gradient-plum-plate {
   background-image: linear-gradient(to right, #556ee6, #f1b44c);
 }
@@ -1069,3 +1820,17 @@ body[data-sidebar-image="img4"] {
 .gradient-strong-great-whale {
   background-image: linear-gradient(to right, darken($primary, 10%), #50a5f1);
 }
+=======
+
+.gradient-plum-plate {
+  background-image: linear-gradient(to right, #556ee6, #f1b44c);
+}
+
+.gradient-strong-bliss {
+  background-image: linear-gradient(to right, #f46a6a, #f1b44c);
+}
+
+.gradient-strong-great-whale {
+  background-image: linear-gradient(to right, darken($primary, 10%), #50a5f1);
+}
+>>>>>>> master

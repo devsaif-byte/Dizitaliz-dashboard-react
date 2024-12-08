@@ -19,17 +19,28 @@ function* registerUser({ payload: { user } }) {
   console.log("using the following url for registration: ")
   try {
     console.log("Trying to register user (within try block)")
+<<<<<<< HEAD
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+=======
+    if (import.meta.env.VITE_APP_DEFAULTAUTH === "firebase") {
+>>>>>>> master
       const response = yield call(
         fireBaseBackend.registerUser,
         user.email,
         user.password
       )
       yield put(registerUserSuccessful(response))
+<<<<<<< HEAD
     } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
       const response = yield call(postJwtRegister, "/post-jwt-register", user)
       yield put(registerUserSuccessful(response))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
+=======
+    } else if (import.meta.env.VITE_APP_DEFAULTAUTH === "jwt") {
+      const response = yield call(postJwtRegister, "/post-jwt-register", user)
+      yield put(registerUserSuccessful(response))
+    } else if (import.meta.env.VITE_APP_DEFAULTAUTH === "fake") {
+>>>>>>> master
       const response = yield call(postFakeRegister, user)
       yield put(registerUserSuccessful(response))
     }

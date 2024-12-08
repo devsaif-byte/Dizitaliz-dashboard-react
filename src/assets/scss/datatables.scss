@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 table.dataTable thead > tr > th.sorting_asc,
 table.dataTable thead > tr > th.sorting_desc,
 table.dataTable thead > tr > th.sorting,
@@ -10,6 +11,22 @@ table.dataTable thead > tr > th:active,
 table.dataTable thead > tr > td:active {
   outline: none;
 }
+=======
+table.dataTable thead>tr>th.sorting_asc,
+table.dataTable thead>tr>th.sorting_desc,
+table.dataTable thead>tr>th.sorting,
+table.dataTable thead>tr>td.sorting_asc,
+table.dataTable thead>tr>td.sorting_desc,
+table.dataTable thead>tr>td.sorting {
+  padding-right: 30px;
+}
+
+table.dataTable thead>tr>th:active,
+table.dataTable thead>tr>td:active {
+  outline: none;
+}
+
+>>>>>>> master
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc,
@@ -18,6 +35,10 @@ table.dataTable thead .sorting_desc_disabled {
   cursor: pointer;
   position: relative;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 table.dataTable thead .sorting:before,
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting_asc:before,
@@ -28,43 +49,88 @@ table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:after {
+<<<<<<< HEAD
   position: absolute;
   bottom: 0.9em;
   display: block;
   opacity: 0.3;
 }
+=======
+  // position: absolute;
+  // bottom: 0.9em;
+  // display: block;
+  // opacity: 0.3;
+  position: absolute;
+  display: block;
+  opacity: .125;
+  right: 10px;
+  line-height: 9px;
+  font-size: .8em;
+}
+
+>>>>>>> master
 table.dataTable thead .sorting:before,
 table.dataTable thead .sorting_asc:before,
 table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:before {
+<<<<<<< HEAD
   right: 1em;
   content: "\2191";
 }
+=======
+  // right: 1em;
+  content: "\2191";
+}
+
+>>>>>>> master
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after,
 table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:after {
+<<<<<<< HEAD
   right: 0.5em;
   content: "\2193";
 }
+=======
+  // right: 0.5em;
+  content: "\2193";
+}
+
+>>>>>>> master
 table.dataTable thead .sorting_asc:before,
 table.dataTable thead .sorting_desc:after {
   opacity: 1;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:after {
   opacity: 0;
 }
+<<<<<<< HEAD
 div.dataTables_scrollHead table.dataTable {
   margin-bottom: 0 !important;
 }
+=======
+
+div.dataTables_scrollHead table.dataTable {
+  margin-bottom: 0 !important;
+}
+
+>>>>>>> master
 div.dataTables_scrollBody table {
   border-top: none;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 div.dataTables_scrollBody table thead .sorting:before,
 div.dataTables_scrollBody table thead .sorting_asc:before,
 div.dataTables_scrollBody table thead .sorting_desc:before,
@@ -73,10 +139,15 @@ div.dataTables_scrollBody table thead .sorting_asc:after,
 div.dataTables_scrollBody table thead .sorting_desc:after {
   display: none;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 div.dataTables_scrollBody table tbody tr:first-child th,
 div.dataTables_scrollBody table tbody tr:first-child td {
   border-top: none;
 }
+<<<<<<< HEAD
 div.dataTables_scrollFoot > .dataTables_scrollFootInner {
   box-sizing: content-box;
 }
@@ -85,6 +156,20 @@ div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
   border-top: none;
 }
 @media screen and (max-width: 767px) {
+=======
+
+div.dataTables_scrollFoot>.dataTables_scrollFootInner {
+  box-sizing: content-box;
+}
+
+div.dataTables_scrollFoot>.dataTables_scrollFootInner>table {
+  margin-top: 0 !important;
+  border-top: none;
+}
+
+@media screen and (max-width: 767px) {
+
+>>>>>>> master
   div.dataTables_wrapper div.dataTables_length,
   div.dataTables_wrapper div.dataTables_filter,
   div.dataTables_wrapper div.dataTables_info,
@@ -92,34 +177,61 @@ div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
     text-align: center;
   }
 }
+<<<<<<< HEAD
 table.dataTable.table-sm > thead > tr > th {
   padding-right: 20px;
 }
+=======
+
+table.dataTable.table-sm>thead>tr>th {
+  padding-right: 20px;
+}
+
+>>>>>>> master
 table.dataTable.table-sm .sorting:before,
 table.dataTable.table-sm .sorting_asc:before,
 table.dataTable.table-sm .sorting_desc:before {
   top: 5px;
+<<<<<<< HEAD
   right: 0.85em;
 }
+=======
+  // right: 0.85em;
+}
+
+>>>>>>> master
 table.dataTable.table-sm .sorting:after,
 table.dataTable.table-sm .sorting_asc:after,
 table.dataTable.table-sm .sorting_desc:after {
   top: 5px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 table.table-bordered.dataTable th,
 table.table-bordered.dataTable td {
   border-left-width: 0;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 table.table-bordered.dataTable th:last-child,
 table.table-bordered.dataTable th:last-child,
 table.table-bordered.dataTable td:last-child,
 table.table-bordered.dataTable td:last-child {
   border-right-width: 0;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 table.table-bordered.dataTable tbody th,
 table.table-bordered.dataTable tbody td {
   border-bottom-width: 0;
 }
+<<<<<<< HEAD
 div.dataTables_scrollHead table.table-bordered {
   border-bottom-width: 0;
 }
@@ -138,3 +250,51 @@ div.table-responsive
   > div[class^="col-"]:last-child {
   padding-right: 0;
 }
+=======
+
+div.dataTables_scrollHead table.table-bordered {
+  border-bottom-width: 0;
+}
+
+div.table-responsive>div.dataTables_wrapper>div.row {
+  margin: 0;
+}
+
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:first-child {
+  padding-left: 0;
+}
+
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child {
+  padding-right: 0;
+}
+
+table.dataTable thead>tr>th.sorting:before,
+table.dataTable thead>tr>th.sorting_asc:before,
+table.dataTable thead>tr>th.sorting_desc:before,
+table.dataTable thead>tr>th.sorting_asc_disabled:before,
+table.dataTable thead>tr>th.sorting_desc_disabled:before,
+table.dataTable thead>tr>td.sorting:before,
+table.dataTable thead>tr>td.sorting_asc:before,
+table.dataTable thead>tr>td.sorting_desc:before,
+table.dataTable thead>tr>td.sorting_asc_disabled:before,
+table.dataTable thead>tr>td.sorting_desc_disabled:before {
+  bottom: 50%;
+  content: "▲";
+  content: "▲" /"";
+}
+
+table.dataTable thead>tr>th.sorting:after,
+table.dataTable thead>tr>th.sorting_asc:after,
+table.dataTable thead>tr>th.sorting_desc:after,
+table.dataTable thead>tr>th.sorting_asc_disabled:after,
+table.dataTable thead>tr>th.sorting_desc_disabled:after,
+table.dataTable thead>tr>td.sorting:after,
+table.dataTable thead>tr>td.sorting_asc:after,
+table.dataTable thead>tr>td.sorting_desc:after,
+table.dataTable thead>tr>td.sorting_asc_disabled:after,
+table.dataTable thead>tr>td.sorting_desc_disabled:after {
+  top: 50%;
+  content: "▼";
+  content: "▼" /"";
+}
+>>>>>>> master

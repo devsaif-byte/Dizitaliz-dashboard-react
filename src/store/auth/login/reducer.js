@@ -23,17 +23,27 @@ const login = (state = initialState, action) => {
       state = {
         ...state,
         loading: false,
+<<<<<<< HEAD
         isUserLogout: false,
+=======
+>>>>>>> master
       }
       break
     case LOGOUT_USER:
       state = { ...state }
       break
     case LOGOUT_USER_SUCCESS:
+<<<<<<< HEAD
       state = { ...state , isUserLogout: true}
       break
     case API_ERROR:
       state = { ...state, error: action.payload, loading: false,isUserLogout: false, }
+=======
+      state = { ...state }
+      break
+    case API_ERROR:
+      state = { ...state, error: action.payload, loading: false }
+>>>>>>> master
       break
     default:
       state = { ...state }
