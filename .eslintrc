@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "rules": {
     "no-undef": "off",
     "react/prop-types" : "off",
@@ -17,20 +16,4 @@
       "experimentalObjectRestSpread": true
     }
   }
-=======
-	"rules": {
-		"no-undef": "off",
-		"no-console": "warn" // Warn on console.log usage
-	},
-	"extends": ["plugin:react/recommended"],
-	"parserOptions": {
-		"ecmaVersion": 6,
-		"sourceType": "module",
-		"ecmaFeatures": {
-			"jsx": true,
-			"modules": true,
-			"experimentalObjectRestSpread": true
-		}
-	}
->>>>>>> master
 }
