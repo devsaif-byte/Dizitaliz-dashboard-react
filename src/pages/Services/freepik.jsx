@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
 	Container,
 	Row,
@@ -21,22 +21,32 @@ import { useSelector } from "react-redux";
 const FreePik = () => {
 	document.title = "Freepik | Digitaliz";
 
-	const { userSubscription, loading, genLink, setGenLink, setRemainingTime } =
-		useSubscriptions();
-
-	// Directly fetch cookies from Redux at the root level
-	const cookies = useSelector((state) => state.cookies.tokens);
-
-	// Memoize cookies for better performance
-	const adminCookies = useMemo(() => {
-		return cookies ? cookies.map((c) => c) : [];
-	}, [cookies]);
-
-	console.log(adminCookies);
-
-	const { authUser } = useAuth();
 	const location = useLocation();
 	const navigate = useNavigate();
+
+	const { authUser, authUserID } = useAuth();
+	const [isActive, setIsActive] = useState(false);
+	const [isGenerating, setIsGenerating] = useState(false);
+	const { loading, genLink, setRemainingTime, userSubscription } =
+		useSubscriptions();
+
+	// Handle download link generation
+	const handleGenerateLink = async () => {
+		if (isGenerating) return; // Prevent multiple requests
+		setIsGenerating(true);
+	};
+	// // Directly fetch cookies from Redux at the root level
+	// const cookies = useSelector((state) => state.cookies.tokens);
+
+	// // Memoize cookies for better performance
+	// const adminCookies = useMemo(() => {
+	// 	return cookies ? cookies.map((c) => c) : [];
+	// }, [cookies]);
+
+	// Memoize the Freepik subscription for efficiency
+	const freepikSubscription = useMemo(() => {
+		return userSubscription?.find((sub) => sub.service === "Freepik");
+	}, [userSubscription]);
 
 	// Navigate to add-cookies if Admin role and visiting /freepik
 	useEffect(() => {
@@ -62,17 +72,11 @@ const FreePik = () => {
 		}
 	}, [genLink, setRemainingTime]);
 
-	// Check for active subscription
-	const isActive = userSubscription?.service_end_date
-		? new Date(userSubscription.service_end_date) > new Date()
-		: false;
-
-	// Memoize the Freepik subscription for efficiency
-	const freepikSubscription = useMemo(() => {
-		return userSubscription?.find((sub) => sub.service === "Freepik");
-	}, [userSubscription]);
-
-	console.log(freepikSubscription);
+	useEffect(() => {
+		if (freepikSubscription) {
+			setIsActive(true);
+		}
+	}, []);
 
 	return (
 		<React.Fragment>
@@ -95,7 +99,7 @@ const FreePik = () => {
 							genLink,
 							userSubscription,
 							freepikSubscription,
-							adminCookies
+							handleGenerateLink
 						)
 					) : (
 						deActivePackageInterface()
@@ -109,14 +113,11 @@ const FreePik = () => {
 export default FreePik;
 
 export const activePackageInterface = (
-	onSubmitDownload,
-	serviceName,
-	adminCookies
+	genLink,
+	userSubscription,
+	freepikSubscription,
+	handleGenerateLink
 ) => {
-	const { adminId, userSubscription, genLink } = useSubscriptions();
-
-	console.log("Admin_Id:", adminId, "UserSubs:", userSubscription);
-
 	// Calculate time difference
 	const calculateTimeDifference = (endDate) => {
 		const currentDate = new Date();
@@ -137,75 +138,8 @@ export const activePackageInterface = (
 	};
 
 	const formattedEndDate = calculateTimeDifference(
-		serviceName[0]?.service_end_date
+		userSubscription[0]?.service_end_date
 	);
-
-	// Handle download link generation
-	const [isGenerating, setIsGenerating] = useState(false);
-
-	const handleGenerateLink = async (link) => {
-		if (isGenerating) return; // Prevent multiple requests
-		setIsGenerating(true);
-
-		// Use the cookies directly from props
-		const cookies = adminCookies;
-		console.log(cookies);
-
-		try {
-			const response = await axios.post(
-				`https://sos.digitaliz.com.bd/api/${serviceName.toLowerCase()}`,
-				{ url: link, cookies: "" },
-				{ headers: { "Content-Type": "application/json" } }
-			);
-
-			const downloadLink = response.data.result;
-
-			if (downloadLink) {
-				const a = document.createElement("a");
-				a.href = downloadLink;
-				a.target = "_blank";
-				document.body.appendChild(a);
-				a.click();
-				document.body.removeChild(a);
-			} else {
-				alert("Failed to generate download link.");
-			}
-		} catch (error) {
-			console.error("Error generating download link:", error);
-			alert("Error occurred while generating the download link.");
-		} finally {
-			setIsGenerating(false);
-		}
-	};
-
-	// 	console.log(service);
-
-	// 	try {
-	// 		const response = await axios.post(
-	// 			`https://sos.digitaliz.com.bd/api/${serviceName.toLowerCase()}`, // Use service name dynamically
-	// 			{ url: link },
-	// 			{ headers: { "Content-Type": "application/json" } }
-	// 		);
-
-	// 		const downloadLink = response.data.result;
-
-	// 		if (downloadLink) {
-	// 			// Programmatically trigger download
-	// 			const a = document.createElement("a");
-	// 			a.href = downloadLink;
-	// 			a.download = ""; // Optional: Specify filename if needed
-	// 			a.target = "_blank";
-	// 			document.body.appendChild(a);
-	// 			a.click();
-	// 			document.body.removeChild(a); // Cleanup
-	// 		} else {
-	// 			alert("Failed to generate download link.");
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("Error generating download link:", error);
-	// 		alert("An error occurred while generating the download link.");
-	// 	}
-	// };
 
 	return (
 		<Row>
@@ -213,7 +147,7 @@ export const activePackageInterface = (
 				<div className="d-flex flex-column flex-md-row gap-3 d-flex my-3">
 					<Card color="primary" className="text-white">
 						<CardBody>
-							<h1>{serviceName[0]?.remaining_daily_downloads}</h1>
+							<h1>{userSubscription[0]?.remaining_daily_downloads}</h1>
 							<h3>Remaining Daily Downloads</h3>
 						</CardBody>
 					</Card>
@@ -226,15 +160,15 @@ export const activePackageInterface = (
 					<Card color="warning" className="text-white">
 						<CardBody>
 							<h1>
-								{serviceName[0]?.total_file_downloads}/
-								{serviceName[0]?.total_download_limits}
+								{userSubscription[0]?.total_file_downloads}/
+								{userSubscription[0]?.total_download_limits}
 							</h1>
 							<h3>Total Download Limit</h3>
 						</CardBody>
 					</Card>
 					<Card color="primary" className="text-white">
 						<CardBody>
-							<h1>{serviceName[0]?.total_file_downloads}</h1>
+							<h1>{userSubscription[0]?.total_file_downloads}</h1>
 							<h3>Total Downloaded Files</h3>
 						</CardBody>
 					</Card>
@@ -251,8 +185,8 @@ export const activePackageInterface = (
 
 						{/* Link Validator Component */}
 						<LinkValidator
-							serviceName={serviceName} // Pass the current service name
-							onValidate={(validatedLink) => handleGenerateLink(validatedLink)}
+							serviceName={freepikSubscription} // Pass the current service name
+							onValidate={() => handleGenerateLink()}
 						/>
 
 						{genLink && (

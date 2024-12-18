@@ -34,7 +34,6 @@ export const fetchUsers = async (auth_id) => {
 		const response = await axios.get(
 			`https://sos.digitaliz.com.bd/api/list-users?admin_id=${auth_id || ""}`
 		);
-		console.log(response.data);
 		return response.data; // Return user data
 	} catch (err) {
 		console.error("Failed to fetch users:", err);
@@ -93,6 +92,7 @@ const UserList = () => {
 			name: currentUser?.name || "",
 			email: currentUser?.email || "",
 			phone: currentUser?.phone || "",
+			password: currentUser?.password || "",
 			role: currentUser?.role || "User",
 		},
 		validationSchema: Yup.object({
@@ -101,6 +101,7 @@ const UserList = () => {
 				.matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Please Enter Valid Email")
 				.required("Please Enter Your Email"),
 			phone: Yup.string().required("Please Enter Your Phone"),
+			password: Yup.string().required("Please Enter Your Password"),
 			role: Yup.string().required("Please Enter Your Role"),
 		}),
 
@@ -135,6 +136,7 @@ const UserList = () => {
 			name: currentUser?.name || "",
 			email: currentUser?.email || "",
 			phone: currentUser?.phone || "",
+			password: currentUser?.password || "",
 			role: currentUser?.role || "User",
 		});
 	}, [currentUser]);
@@ -160,6 +162,12 @@ const UserList = () => {
 			{
 				header: "Phone",
 				accessorKey: "phone",
+				enableColumnFilter: false,
+				enableSorting: true,
+			},
+			{
+				header: "Password",
+				accessorKey: "password",
 				enableColumnFilter: false,
 				enableSorting: true,
 			},
@@ -217,8 +225,6 @@ const UserList = () => {
 
 	// Handle user deletion
 	const handleDeleteUser = async () => {
-		console.log(currentUser);
-
 		if (currentUser?.user_id) {
 			// Logic to delete the user from API can go here
 			setLoading(true);
@@ -230,10 +236,8 @@ const UserList = () => {
 						user_id: currentUser?.user_id,
 					}
 				);
-				console.log(response);
 
 				toast.success("User deleted successfully!");
-				console.log("User deleted:", currentUser);
 				toggleModal();
 				fetchUsers(authUserID);
 			} catch (err) {
@@ -300,7 +304,6 @@ const UserList = () => {
 							<Form
 								onSubmit={(e) => {
 									e.preventDefault();
-									console.log(e);
 									handleSubmit();
 								}}
 							>
@@ -346,6 +349,20 @@ const UserList = () => {
 											/>
 											{touched.phone && errors.phone && (
 												<FormFeedback>{errors.phone}</FormFeedback>
+											)}
+										</div>
+										<div className="mb-3">
+											<Label>Password</Label>
+											<Input
+												name="password"
+												type="password"
+												onChange={handleChange}
+												onBlur={handleBlur}
+												value={values.password}
+												invalid={touched.password && errors.password}
+											/>
+											{touched.password && errors.password && (
+												<FormFeedback>{errors.password}</FormFeedback>
 											)}
 										</div>
 										<div className="mb-3">

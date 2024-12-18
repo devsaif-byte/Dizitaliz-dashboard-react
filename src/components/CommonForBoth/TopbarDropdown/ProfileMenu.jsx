@@ -25,7 +25,6 @@ const ProfileMenu = (props) => {
 
 	// Auth context
 	const { authUser, logout } = useAuth();
-	console.log(authUser?.role);
 
 	// Set username from authUser
 	const username = authUser?.email || "Admin";

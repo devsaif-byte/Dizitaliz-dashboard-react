@@ -50,17 +50,15 @@ const Register2 = () => {
 			password: Yup.string().required("Please Enter Your Password"),
 		}),
 		onSubmit: (values) => {
-			console.log(values);
-
 			axios
 				.post(`https://sos.digitaliz.com.bd/register`, values, {
 					headers: { "Content-Type": "application/json" },
 				})
 				.then(function (response) {
-					console.log(response);
 					if (response.status === 200 && response.statusText === "OK")
 						// Save the uuid in localStorage
-						localStorage.setItem("authUserID", response.data.user_id);
+						// localStorage.setItem("authUserID", response.data.user_id);
+						sessionStorage.setItem("authUserID", response.data.user_id);
 					navigate("/dashboard");
 				})
 				.catch(function (error) {

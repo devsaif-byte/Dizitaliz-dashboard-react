@@ -13,11 +13,11 @@ import { SubscriptionProvider } from "../../contexts/SubscriptionContext";
 import _ from "lodash";
 
 const Dashboard = (props) => {
+	document.title = "Dashboard | Digitaliz";
 	const [storedUserID, setStoredUserID] = useState(null);
 	//meta title
-	document.title = "Dashboard | Digitaliz";
 	useEffect(() => {
-		setStoredUserID(localStorage.getItem("authUserID"));
+		setStoredUserID(sessionStorage.getItem("authUserID"));
 	}, []);
 
 	return (

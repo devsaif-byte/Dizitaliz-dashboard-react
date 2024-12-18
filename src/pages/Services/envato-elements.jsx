@@ -57,8 +57,6 @@ const EnvatoElements = () => {
 		[userSubscription]
 	);
 
-	console.log(envatoSubscription);
-
 	return (
 		<React.Fragment>
 			<div className="page-content">

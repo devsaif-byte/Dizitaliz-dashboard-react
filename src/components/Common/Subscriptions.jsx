@@ -45,7 +45,7 @@ const Subscriptions = () => {
 	const [activeTab, setActiveTab] = useState("1");
 
 	const [modal, setModal] = useState(false); // Modal visibility
-	const [loading, setLoading] = useState(false); // Loading state
+	const [loading, setLoading] = useState(true); // Loading state
 	const [error, setError] = useState(null);
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -57,8 +57,6 @@ const Subscriptions = () => {
 	const navigate = useNavigate();
 	const { subscriptions, setSubscriptions } = useSubscriptions();
 
-	console.log("All Subscriptions:", subscriptions);
-
 	let subs = [];
 	if (authUser?.role === "Admin") {
 		// Filter out invalid subscriptions
@@ -66,8 +64,6 @@ const Subscriptions = () => {
 	} else if (authUser?.role === "User") {
 		subs = subscriptions.userSpecificSubscriptions;
 	}
-
-	console.log("Auth accessed Subscriptions", subs);
 
 	const formattedSubscriptions = useMemo(() => {
 		if (!subs || subs?.length === 0) return []; // Return empty array if no subs
@@ -93,7 +89,7 @@ const Subscriptions = () => {
 				id: sub.subscription_id,
 				serviceName: `${sub.service} - ${sub.total_download_limits} downloads`,
 				dailyDownload: sub.remaining_daily_downloads,
-				serviceScope: sub.total_file_downloads > 50 ? "Premium" : "Standard",
+				serviceScope: sub.total_download_limits > 100 ? "Premium" : "Standard",
 				endDate: formattedEndDate,
 				status,
 			};
@@ -102,7 +98,6 @@ const Subscriptions = () => {
 
 	const arr = formattedSubscriptions.flat().map((el) => el);
 
-	console.table(formattedSubscriptions.flat().map((el) => el));
 	// const toggleTab = (tab) => {
 	// 	if (activeTab !== tab) {
 	// 		setActiveTab(tab);
@@ -131,6 +126,19 @@ const Subscriptions = () => {
 				header: "Service Scope",
 				accessorKey: "serviceScope",
 				enableColumnFilter: false,
+				cell: ({ row }) => {
+					// Use the calculated status from the row's original data
+					const status = row.original.serviceScope;
+
+					switch (status) {
+						case "Premium":
+							return <Badge className="bg-warning font-size-10">Premium</Badge>;
+						case "Standard":
+							return <Badge className="bg-info font-size-10">Standard</Badge>;
+						default:
+							return null;
+					}
+				},
 			},
 			{
 				header: "End Date",
@@ -161,93 +169,89 @@ const Subscriptions = () => {
 	);
 
 	// Formik setup
-	const {
-		values,
-		handleChange,
-		handleBlur,
-		handleSubmit,
-		touched,
-		errors,
-		resetForm,
-	} = useFormik({
-		initialValues: {
-			email: "",
-			service: "",
-			remaining_daily_downloads: "",
-			service_end_date: "",
-			total_download_limits: "",
-		},
-		validationSchema: Yup.object({
-			email: Yup.string().required("Email is required"),
-			service: Yup.string().required("Service name is required"),
-			remaining_daily_downloads: Yup.number()
-				.required("Daily download limit is required")
-				.min(0, "Cannot be negative")
-				.max(25, "Cannot be more than 25"),
-			service_end_date: Yup.date().required("Service end date is required"),
-			total_download_limits: Yup.number()
-				.required("Total download limit is required")
-				.min(0, "Cannot be negative")
-				.max(100, "Cannot be more than 100"),
-		}),
-		onSubmit: async (formValues) => {
-			setLoading(true);
-			console.log(formValues);
+	const { values, handleChange, handleBlur, handleSubmit, touched, errors } =
+		useFormik({
+			initialValues: {
+				email: "",
+				service: "",
+				remaining_daily_downloads: "",
+				service_end_date: "",
+				total_download_limits: "",
+			},
+			validationSchema: Yup.object({
+				email: Yup.string().required("Email is required"),
+				service: Yup.string().required("Service name is required"),
+				remaining_daily_downloads: Yup.number()
+					.required("Daily download limit is required")
+					.min(0, "Cannot be negative"),
+				service_end_date: Yup.date().required("Service end date is required"),
+				total_download_limits: Yup.number()
+					.required("Total download limit is required")
+					.min(0, "Cannot be negative"),
+				// .max(100, "Cannot be more than 100"),
+			}),
+			onSubmit: async (formValues) => {
+				setLoading(true);
 
-			try {
-				const getUsers = await fetchUsers(authUserID);
-				const targetUser = getUsers.find((user) =>
-					user.email.includes(formValues.email)
-				);
-
-				// Format the service_end_date
-				const formattedDate = new Date(formValues.service_end_date)
-					.toISOString()
-					.slice(0, 10);
-
-				console.log(targetUser.user_id);
-				if (targetUser) {
-					const response = await axios.post(
-						`https://sos.digitaliz.com.bd/api/create-subscription`,
-
-						{
-							admin_id: authUserID,
-							user_id: targetUser.user_id,
-							...formValues,
-							service_end_date: formattedDate,
-							total_file_downloads: 0,
-						},
-						{
-							headers: {
-								"Content-Type": "application/json",
-							},
-						}
+				try {
+					const getUsers = await fetchUsers(authUserID);
+					const targetUser = getUsers.find((user) =>
+						user.email.includes(formValues.email)
 					);
-					// setSubscriptions(response.data);
-					console.log(response);
 
-					if (response.status === 200 && response.data.success !== false) {
-						toast.success("Subscription created successfully!");
+					// Format the service_end_date
+					const formattedDate = new Date(formValues.service_end_date)
+						.toISOString()
+						.slice(0, 10);
+
+					if (targetUser) {
+						const response = await axios.post(
+							`https://sos.digitaliz.com.bd/api/create-subscription`,
+
+							{
+								admin_id: authUserID,
+								user_id: targetUser.user_id,
+								...formValues,
+								service_end_date: formattedDate,
+								total_file_downloads: 0,
+							},
+							{
+								headers: {
+									"Content-Type": "application/json",
+								},
+							}
+						);
+						// setSubscriptions(response.data);
+
+						if (!response)
+							toast.error(
+								"Somethings wrong! Maybe this user does not exist on database."
+							);
+						if (response.data.success === false) {
+							toast.warning(
+								"There might be a subscription exist for this user!"
+							);
+						}
+						if (response.status === 200 && response.data.success !== false) {
+							toast.success("Subscription created successfully!");
+						}
+
+						await fetchUsers(authUserID);
+
+						resetForm();
+						toggleModal(); // Close modal after success
 					}
-					// resetForm();
-					toggleModal(); // Close modal after success
+				} catch (error) {
+					toast.error("Failed to create subscription.");
+					console.error(error);
+				} finally {
+					setLoading(false);
 				}
-			} catch (error) {
-				toast.error("Failed to create subscription.");
-				console.error(error);
-				const getUsers = await fetchUsers(authUserID);
-				console.log(
-					getUsers.find((user) => user.email.includes(formValues.email))
-				);
-			} finally {
-				setLoading(false);
-			}
-		},
-	});
+			},
+		});
 
 	// Toggle modal visibility
 	const toggleModal = () => {
-		console.log("Modal toggled");
 		setModal(!modal);
 	};
 
@@ -260,16 +264,18 @@ const Subscriptions = () => {
 							<Card>
 								<CardBody>
 									<h4 className="card-title mb-3">Subscriptions</h4>
-									{loading ? (
-										<Spinners setLoading={setLoading} />
-									) : (
-										<>
-											<TabContent activeTab={activeTab} className="p-3">
-												<TabPane tabId="1" id="all-order">
+									<TabContent activeTab={activeTab} className="p-3">
+										<TabPane tabId="1" id="all-order">
+											{loading ? (
+												<Spinners setLoading={setLoading} />
+											) : (
+												<>
 													<TableContainer
 														columns={columns}
 														data={arr}
-														isAddButton={true}
+														isAddButton={
+															authUser?.role === "Admin" ? true : false
+														}
 														handleUserClick={() => toggleModal()}
 														buttonName="Create Subscription"
 														isCustomPageSize={true}
@@ -281,10 +287,10 @@ const Subscriptions = () => {
 														buttonClass="btn btn-success btn-rounded waves-effect waves-light addusers-modal mb-2"
 														tableClass="table-hover table-nowrap datatable dt-responsive nowrap dataTable no-footer dtr-inline"
 													/>
-												</TabPane>
-											</TabContent>
-										</>
-									)}
+												</>
+											)}
+										</TabPane>
+									</TabContent>
 								</CardBody>
 							</Card>
 						</Col>
@@ -297,7 +303,6 @@ const Subscriptions = () => {
 							<Form
 								onSubmit={(e) => {
 									e.preventDefault();
-									console.log(e);
 
 									handleSubmit();
 								}}
@@ -411,3 +416,23 @@ const Subscriptions = () => {
 };
 
 export default Subscriptions;
+
+async function updateSubscriptionCount(token) {
+	try {
+		const response = await fetch("/update-subscription", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ token }),
+		});
+
+		if (response.ok) {
+			alert("Subscription updated successfully!");
+		} else {
+			alert("Failed to update subscription.");
+		}
+	} catch (error) {
+		console.error("Error updating subscription:", error);
+	}
+}

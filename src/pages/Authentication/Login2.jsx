@@ -21,7 +21,6 @@ import CarouselPage from "./CarouselPage";
 import logo from "../../assets/images/digitaliz-logo.png";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useAuth } from "../../routes/route";
 
 const Login2 = () => {
 	const [passwordShow, setPasswordShow] = useState(false);
@@ -44,27 +43,6 @@ const Login2 = () => {
 			password: Yup.string().required("Please Enter Your Password"),
 		}),
 		onSubmit: (values) => {
-			console.log(values);
-
-			// axios
-			// 	.post(`https://sos.digitaliz.com.bd/login`, values, {
-			// 		headers: { "Content-Type": "application/json" },
-			// 	})
-			// 	.then(function (response) {
-			// 		console.log(response);
-
-			// 		if (response.status === 200 && response.statusText === "OK") {
-			// 			// Save the uuid in localStorage
-			// 			localStorage.setItem("authUserID", response.data.user_id);
-
-			// 			navigate("/dashboard");
-			// 			toast.success("Login successfull");
-			// 		}
-			// 	})
-			// 	.catch(function (error) {
-			// 		console.log(error);
-			// 		toast.error(error.message);
-			// 	});
 			fetch(`https://sos.digitaliz.com.bd/login`, {
 				method: "POST",
 				headers: {
@@ -80,10 +58,9 @@ const Login2 = () => {
 					}
 				})
 				.then((data) => {
-					console.log(data);
-
 					// Save the uuid in localStorage
-					localStorage.setItem("authUserID", data.user_id);
+					// localStorage.setItem("authUserID", data.user_id);
+					sessionStorage.setItem("authUserID", data.user_id);
 
 					navigate("/dashboard");
 					toast.success("Login successful");

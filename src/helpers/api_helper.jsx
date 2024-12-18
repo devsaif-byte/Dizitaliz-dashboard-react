@@ -33,7 +33,7 @@ import axios from "axios";
 
 // Axios instance with JSON content type
 const api = axios.create({
-	baseURL: "http://157.245.110.29:3000", // Replace with your base URL
+	baseURL: "https://sos.digitaliz.com.bd", // Replace with your base URL
 	// timeout: 5000,
 	headers: {
 		"Content-Type": "application/json", // Ensure JSON content type

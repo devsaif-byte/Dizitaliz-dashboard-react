@@ -21,9 +21,9 @@ export const AuthProvider = ({ children }) => {
 	const [authUserID, setAuthUserID] = useState(null);
 	const [loading, setLoading] = useState(true);
 
-	// Fetch user data based on localStorage
+	// Fetch user data based on sessionStorage
 	useEffect(() => {
-		const storedUserID = localStorage.getItem("authUserID");
+		const storedUserID = sessionStorage.getItem("authUserID");
 		if (storedUserID) {
 			axios
 				.get(
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 			);
 			setAuthUser(res.data);
 			setAuthUserID(userID);
-			localStorage.setItem("authUserID", userID);
+			sessionStorage.setItem("authUserID", userID);
 		} catch (err) {
 			console.error("Login failed:", err);
 			logout();
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 	const logout = () => {
 		setAuthUser(null);
 		setAuthUserID(null);
-		localStorage.removeItem("authUserID");
+		sessionStorage.removeItem("authUserID");
 	};
 
 	if (loading) return <Spinners setLoading={setLoading} />; // Loader while fetching user data

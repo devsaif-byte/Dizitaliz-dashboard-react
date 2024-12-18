@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input, Label, Alert } from "reactstrap";
+import { useAuth } from "../../routes/route";
 
 const LinkValidator = ({ serviceName }) => {
 	const [inputLink, setInputLink] = useState("");
@@ -10,19 +11,21 @@ const LinkValidator = ({ serviceName }) => {
 	const [cache, setCache] = useState(new Map());
 	const cacheRef = useRef(cache); // Use ref to avoid stale state in setInterval
 
-	useEffect(() => {
-		// Cleanup expired links every 1 minute
-		const interval = setInterval(() => {
-			const now = Date.now();
-			const updatedCache = new Map(
-				[...cacheRef.current].filter(([, timestamp]) => now - timestamp < 60000)
-			);
-			setCache(updatedCache);
-			cacheRef.current = updatedCache;
-		}, 60000);
+	const { authUserID } = useAuth();
 
-		return () => clearInterval(interval);
-	}, []);
+	// useEffect(() => {
+	// 	// Cleanup expired links every 1 minute
+	// 	const interval = setInterval(() => {
+	// 		const now = Date.now();
+	// 		const updatedCache = new Map(
+	// 			[...cacheRef.current].filter(([, timestamp]) => now - timestamp < 60000)
+	// 		);
+	// 		setCache(updatedCache);
+	// 		cacheRef.current = updatedCache;
+	// 	}, 60000);
+
+	// 	return () => clearInterval(interval);
+	// }, []);
 
 	const validateLink = (link) => {
 		// Service-specific URL patterns
@@ -62,7 +65,8 @@ const LinkValidator = ({ serviceName }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setIsValid(validateLink(inputLink));
+		// setIsValid(validateLink(inputLink));
+		setIsValid(inputLink);
 	};
 
 	return (
@@ -74,7 +78,7 @@ const LinkValidator = ({ serviceName }) => {
 					type="text"
 					value={inputLink}
 					onChange={(e) => setInputLink(e.target.value)}
-					placeholder={`Paste your ${serviceName[0].service} link here`}
+					placeholder={`Paste your ${serviceName.service} link here`}
 				/>
 
 				<Button
@@ -94,11 +98,12 @@ const LinkValidator = ({ serviceName }) => {
 							// Call the API to generate the download link
 							const response = await axios.post(
 								`https://sos.digitaliz.com.bd/api/freepik`,
-								{ url: inputUrl, cookie: "" },
+								{ url: inputUrl, user_id: authUserID },
 								{ headers: { "Content-Type": "application/json" } }
 							);
 
 							const downloadLink = response.data.result;
+							console.log(response);
 
 							if (downloadLink) {
 								// Programmatically trigger download

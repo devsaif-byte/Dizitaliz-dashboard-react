@@ -148,7 +148,6 @@ const SidebarContent = (props) => {
 
 	const handleActivateClick = () => {
 		// Perform activation logic here
-		console.log("Activation button clicked");
 		closeModal(); // Close modal after activation
 	};
 	return (
