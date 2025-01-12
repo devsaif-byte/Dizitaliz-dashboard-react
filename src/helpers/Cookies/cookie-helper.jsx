@@ -5,6 +5,8 @@ const BASE_URL = "https://sos.digitaliz.com.bd"; // Centralized base URL
 
 // Add cookie
 async function addCookie(adminId, service, token, isEditing) {
+	console.log(adminId);
+
 	const payload = {
 		admin_id: adminId,
 		service: service, // "Freepik" or "Envato"
@@ -12,12 +14,16 @@ async function addCookie(adminId, service, token, isEditing) {
 		// cookies: token, // Encode the cookie to Normal format
 	};
 
+	console.log(payload);
+
 	try {
 		const response = await axios.post(`${BASE_URL}/api/add-cookie`, payload, {
 			headers: {
 				"Content-Type": "application/json",
 			},
 		});
+
+		console.log(response);
 
 		if (response.data.success) {
 			if (isEditing) toast.success("Cookie updated!");
@@ -115,11 +121,41 @@ async function parseCookies(cookie) {
 			cookieString = cookieString.slice(0, -2);
 		}
 
+		console.log(cookieString);
 		return cookieString;
 	} catch (error) {
 		console.error("Failed to parse cookies:", error);
 		throw error;
 	}
 }
+// async function parseCookies(cookie) {
+// 	try {
+// 		// Parse the JSON string into an array of objects
+// 		const parsedCookies = JSON.parse(cookie);
+
+// 		// Initialize an empty string for the resulting cookie string
+// 		let cookieString = "";
+
+// 		// Iterate through the array
+// 		parsedCookies.forEach((cookieObj) => {
+// 			// Ensure `name` and `value` exist before using them
+// 			if (cookieObj?.name && cookieObj?.value) {
+// 				// Format each cookie as "name=value; " and append it to the string
+// 				cookieString += `${cookieObj.name}=${cookieObj.value}; `;
+// 			}
+// 		});
+
+// 		// Remove the trailing "; " if it exists
+// 		if (cookieString.endsWith("; ")) {
+// 			cookieString = cookieString.slice(0, -2);
+// 		}
+
+// 		console.log(cookieString);
+// 		return cookieString;
+// 	} catch (error) {
+// 		console.error("Failed to parse cookies:", error);
+// 		throw error;
+// 	}
+// }
 
 export { fetchTokens, addCookie, deleteCookie, listCookies, parseCookies };

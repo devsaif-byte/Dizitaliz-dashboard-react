@@ -99,10 +99,15 @@ const LinkValidator = ({ serviceName }) => {
 							const response = await axios.post(
 								`https://sos.digitaliz.com.bd/api/freepik`,
 								{ url: inputUrl, user_id: authUserID },
-								{ headers: { "Content-Type": "application/json" } }
+
+								{
+									headers: { "Content-Type": "application/json" },
+								}
 							);
 
-							const downloadLink = response.data.result;
+							const data = await response.json();
+							const downloadLink = data.result;
+
 							console.log(response);
 
 							if (downloadLink) {

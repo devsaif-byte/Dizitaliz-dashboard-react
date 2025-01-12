@@ -88,13 +88,18 @@ const AddCookies = () => {
 	const [tokens, setTokens] = useState([]);
 	const [isEditing, setIsEditing] = useState(false);
 	const [editId, setEditId] = useState(null);
+	console.log("Tokens:", tokens);
+	console.log("EditId:", editId);
+	console.log("AdminId:", adminId);
 
 	// Load tokens from the backend
 
 	useEffect(() => {
-		if (!adminId) return;
-		fetchTokens(adminId, setTokens);
-	}, []);
+		if (!adminId) {
+			console.error("Admin ID not found.");
+			return;
+		} else fetchTokens(adminId, setTokens);
+	}, [adminId]);
 
 	const formik = useFormik({
 		initialValues: {
@@ -110,7 +115,11 @@ const AddCookies = () => {
 				if (isEditing && editId !== null) {
 					// Remove the old token first
 					const oldTokenId = tokens[editId].id;
-
+					console.log(oldTokenId);
+					if (!oldTokenId) {
+						console.error("Invalid token index or token not found.");
+						return;
+					}
 					const deleteResponse = await deleteCookie(
 						adminId,
 						oldTokenId,
@@ -129,6 +138,8 @@ const AddCookies = () => {
 						values.token,
 						isEditing
 					);
+					console.log(response);
+
 					if (response.data) {
 						// Refresh the token list
 						const updatedTokens = await listCookies(adminId);
@@ -143,6 +154,7 @@ const AddCookies = () => {
 						values.token,
 						isEditing
 					);
+
 					if (response.data) {
 						// Refresh the token list
 						const updatedTokens = await listCookies(adminId);
@@ -161,6 +173,63 @@ const AddCookies = () => {
 				setSubmitting(false);
 			}
 		},
+		// onSubmit: async (values, { setSubmitting, resetForm }) => {
+		// 	try {
+		// 		if (!adminId) {
+		// 			console.error("Admin ID is null or undefined.");
+		// 			return;
+		// 		}
+
+		// 		if (isEditing && editId !== null) {
+		// 			const oldTokenId = tokens[editId]?.id;
+		// 			if (!oldTokenId) {
+		// 				console.error("Invalid token index or token not found.");
+		// 				return;
+		// 			}
+
+		// 			// Delete the old token
+		// 			const deleteResponse = await deleteCookie(
+		// 				adminId,
+		// 				oldTokenId,
+		// 				isEditing
+		// 			);
+		// 			if (!deleteResponse?.success) {
+		// 				console.error("Failed to delete the old token.");
+		// 				return;
+		// 			}
+
+		// 			// Add the updated token
+		// 			const response = await addCookie(
+		// 				adminId,
+		// 				values.service,
+		// 				values.token,
+		// 				isEditing
+		// 			);
+		// 			if (response?.data) {
+		// 				setTokens((await listCookies(adminId)) || []);
+		// 			}
+		// 		} else {
+		// 			// Add a new token
+		// 			const response = await addCookie(
+		// 				adminId,
+		// 				values.service,
+		// 				values.token,
+		// 				isEditing
+		// 			);
+		// 			if (response?.data) {
+		// 				setTokens((await listCookies(adminId)) || []);
+		// 			}
+		// 		}
+
+		// 		resetForm();
+		// 		setIsEditing(false);
+		// 		setEditId(null);
+		// 	} catch (error) {
+		// 		console.error("Error submitting token:", error);
+		// 	} finally {
+		// 		setSubmitting(false);
+		// 	}
+		// },
 	});
 
 	const handleEdit = (id) => {

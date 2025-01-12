@@ -169,86 +169,91 @@ const Subscriptions = () => {
 	);
 
 	// Formik setup
-	const { values, handleChange, handleBlur, handleSubmit, touched, errors } =
-		useFormik({
-			initialValues: {
-				email: "",
-				service: "",
-				remaining_daily_downloads: "",
-				service_end_date: "",
-				total_download_limits: "",
-			},
-			validationSchema: Yup.object({
-				email: Yup.string().required("Email is required"),
-				service: Yup.string().required("Service name is required"),
-				remaining_daily_downloads: Yup.number()
-					.required("Daily download limit is required")
-					.min(0, "Cannot be negative"),
-				service_end_date: Yup.date().required("Service end date is required"),
-				total_download_limits: Yup.number()
-					.required("Total download limit is required")
-					.min(0, "Cannot be negative"),
-				// .max(100, "Cannot be more than 100"),
-			}),
-			onSubmit: async (formValues) => {
-				setLoading(true);
+	const {
+		values,
+		handleChange,
+		handleBlur,
+		handleSubmit,
+		touched,
+		errors,
+		resetForm,
+	} = useFormik({
+		initialValues: {
+			email: "",
+			service: "",
+			remaining_daily_downloads: "",
+			service_end_date: "",
+			total_download_limits: "",
+		},
+		validationSchema: Yup.object({
+			email: Yup.string().required("Email is required"),
+			service: Yup.string().required("Service name is required"),
+			remaining_daily_downloads: Yup.number()
+				.required("Daily download limit is required")
+				.min(0, "Cannot be negative"),
+			service_end_date: Yup.date().required("Service end date is required"),
+			total_download_limits: Yup.number()
+				.required("Total download limit is required")
+				.min(0, "Cannot be negative"),
+			// .max(100, "Cannot be more than 100"),
+		}),
+		onSubmit: async (formValues) => {
+			setLoading(true);
 
-				try {
-					const getUsers = await fetchUsers(authUserID);
-					const targetUser = getUsers.find((user) =>
-						user.email.includes(formValues.email)
-					);
+			try {
+				const getUsers = await fetchUsers(authUserID);
+				const targetUser = getUsers.find((user) =>
+					user.email.includes(formValues.email)
+				);
 
-					// Format the service_end_date
-					const formattedDate = new Date(formValues.service_end_date)
-						.toISOString()
-						.slice(0, 10);
+				// Format the service_end_date
+				const formattedDate = new Date(formValues.service_end_date)
+					.toISOString()
+					.slice(0, 10);
 
-					if (targetUser) {
-						const response = await axios.post(
-							`https://sos.digitaliz.com.bd/api/create-subscription`,
+				if (targetUser) {
+					const response = await axios.post(
+						`https://sos.digitaliz.com.bd/api/create-subscription`,
 
-							{
-								admin_id: authUserID,
-								user_id: targetUser.user_id,
-								...formValues,
-								service_end_date: formattedDate,
-								total_file_downloads: 0,
+						{
+							admin_id: authUserID,
+							user_id: targetUser.user_id,
+							...formValues,
+							service_end_date: formattedDate,
+							total_file_downloads: 0,
+						},
+						{
+							headers: {
+								"Content-Type": "application/json",
 							},
-							{
-								headers: {
-									"Content-Type": "application/json",
-								},
-							}
+						}
+					);
+					setSubscriptions(response.data);
+
+					if (!response)
+						toast.error(
+							"Somethings wrong! Maybe this user does not exist on database."
 						);
-						// setSubscriptions(response.data);
-
-						if (!response)
-							toast.error(
-								"Somethings wrong! Maybe this user does not exist on database."
-							);
-						if (response.data.success === false) {
-							toast.warning(
-								"There might be a subscription exist for this user!"
-							);
-						}
-						if (response.status === 200 && response.data.success !== false) {
-							toast.success("Subscription created successfully!");
-						}
-
-						await fetchUsers(authUserID);
-
-						resetForm();
-						toggleModal(); // Close modal after success
+					if (response.data.success === false) {
+						toast.warning("There might be a subscription exist for this user!");
 					}
-				} catch (error) {
-					toast.error("Failed to create subscription.");
-					console.error(error);
-				} finally {
-					setLoading(false);
+					if (response.status === 200 && response.data.success !== false) {
+						toast.success("Subscription created successfully!");
+					}
+
+					await fetchUsers(authUserID);
+
+					resetForm();
+					toggleModal(); // Close modal after success
 				}
-			},
-		});
+			} catch (error) {
+				toast.error("Failed to create subscription.");
+				console.error(error);
+			} finally {
+				setLoading(false);
+			}
+		},
+	});
 
 	// Toggle modal visibility
 	const toggleModal = () => {
